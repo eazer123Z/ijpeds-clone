@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - IJPEDS</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="container">
+            <span><i class="fas fa-envelope"></i> editor@ijpeds.com</span>
+            <span><i class="fas fa-phone"></i> +91-XXXX-XXXXXX</span>
+        </div>
+    </div>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="../index.html" class="logo" style="text-decoration:none;">
+                <div class="logo-icon"><i class="fas fa-book-medical"></i></div>
+                <div><h1>IJPEDS</h1><p class="tagline">International Journal of Pediatrics</p></div>
+            </a>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search articles...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-menu" id="userMenu">
+                    <button class="btn-user" onclick="toggleUserDropdown()">
+                        <i class="fas fa-user-circle"></i> User <i class="fas fa-caret-down"></i>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="#" onclick="openModal('loginModal')"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        <a href="#" onclick="openModal('registerModal')"><i class="fas fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <div class="logged-in-menu" id="loggedInMenu" style="display:none;">
+                    <span id="welcomeUser"></span>
+                    <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav class="main-nav">
+        <div class="container">
+            <button class="mobile-toggle" onclick="toggleMobileNav()"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html"><i class="fas fa-home"></i> HOME</a></li>
+                <li><a href="about.html" class="active"><i class="fas fa-info-circle"></i> ABOUT</a></li>
+                <li><a href="archive.html"><i class="fas fa-archive"></i> ARCHIVE</a></li>
+                <li><a href="submission.html"><i class="fas fa-upload"></i> SUBMISSION</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> CONTACT US</a></li>
+                <li><a href="alerts.html"><i class="fas fa-bell"></i> ALERTS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> <span>/</span> About
+            </div>
+            <h2>About the Journal</h2>
+            <p>International Journal of Pediatrics and Adolescent Medicine</p>
+        </div>
+    </section>
+
+    <section class="page-content">
+        <div class="container">
+            <div class="content-card">
+                <h3><i class="fas fa-info-circle" style="color:#2563eb; margin-right:8px;"></i> About IJPEDS</h3>
+                <p>The International Journal of Pediatrics (IJPEDS) is a peer-reviewed, open-access journal that publishes original research, review articles, case reports, and letters to the editor in all areas of pediatric medicine and child health.</p>
+                <p>Established in 2015, IJPEDS is committed to advancing pediatric healthcare through the dissemination of high-quality research. Our editorial board comprises leading pediatric specialists from around the world, ensuring rigorous peer review and global relevance.</p>
+            </div>
+
+            <div class="content-card">
+                <h3><i class="fas fa-bullseye" style="color:#2563eb; margin-right:8px;"></i> Scope & Aims</h3>
+                <p>The journal covers a broad range of topics including but not limited to:</p>
+                <ul>
+                    <li>General Pediatrics and Adolescent Medicine</li>
+                    <li>Neonatology and Perinatal Medicine</li>
+                    <li>Pediatric Surgery and Subspecialties</li>
+                    <li>Childhood Infectious Diseases and Vaccination</li>
+                    <li>Pediatric Nutrition and Growth</li>
+                    <li>Developmental and Behavioral Pediatrics</li>
+                    <li>Pediatric Genetics and Rare Diseases</li>
+                    <li>Child and Adolescent Mental Health</li>
+                    <li>Pediatric Emergency and Critical Care</li>
+                    <li>Global Child Health and Public Health</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h3><i class="fas fa-users" style="color:#2563eb; margin-right:8px;"></i> Editorial Board</h3>
+                <p><strong>Editor-in-Chief:</strong> Dr. Anil Sharma, MD, PhD — All India Institute of Medical Sciences, New Delhi</p>
+                <p><strong>Deputy Editor:</strong> Dr. Sarah Williams, MD — Johns Hopkins University, Baltimore</p>
+                <p><strong>Associate Editors:</strong></p>
+                <ul>
+                    <li>Dr. Kenji Tanaka — Tokyo Medical University</li>
+                    <li>Dr. Maria Garcia — Hospital Sant Joan de Déu, Barcelona</li>
+                    <li>Dr. James Brown — Royal Children's Hospital, Melbourne</li>
+                    <li>Dr. Fatima Al-Hassan — King Faisal Specialist Hospital, Riyadh</li>
+                </ul>
+                <p><strong>International Advisory Board:</strong> 45 members from 22 countries</p>
+            </div>
+
+            <div class="content-card">
+                <h3><i class="fas fa-book-open" style="color:#2563eb; margin-right:8px;"></i> Publication Details</h3>
+                <ul>
+                    <li><strong>ISSN:</strong> XXXX-XXXX (Online)</li>
+                    <li><strong>Frequency:</strong> Quarterly (4 issues per year)</li>
+                    <li><strong>Publication Model:</strong> Continuous online publication</li>
+                    <li><strong>Access:</strong> Open Access (CC BY 4.0)</li>
+                    <li><strong>Peer Review:</strong> Double-blind peer review</li>
+                    <li><strong>Average Review Time:</strong> 4-6 weeks</li>
+                    <li><strong>Acceptance Rate:</strong> ~35%</li>
+                    <li><strong>Indexing:</strong> Scopus, PubMed Central, DOAJ, EBSCO</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h3><i class="fas fa-shield-alt" style="color:#2563eb; margin-right:8px;"></i> Publication Ethics</h3>
+                <p>IJPEDS adheres to the guidelines set by the Committee on Publication Ethics (COPE). All submitted manuscripts are screened for plagiarism using automated tools. Authors must confirm that their work is original, not under consideration elsewhere, and approved by all co-authors.</p>
+                <p>Studies involving human subjects must include ethics committee approval and informed consent documentation. Clinical trials must be registered in a recognized public registry.</p>
+            </div>
+
+            <div class="content-card">
+                <h3><i class="fas fa-envelope-open-text" style="color:#2563eb; margin-right:8px;"></i> Contact the Editorial Office</h3>
+                <p>For inquiries regarding manuscript submission, review process, or general information:</p>
+                <ul>
+                    <li><strong>Email:</strong> editor@ijpeds.com</li>
+                    <li><strong>Phone:</strong> +91-XXXX-XXXXXX</li>
+                    <li><strong>Address:</strong> IJPEDS Editorial Office, Medical Research Complex, New Delhi, India</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 IJPEDS — International Journal of Pediatrics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login/Register Modals (same as index) -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('loginModal')">&times;</button>
+            <div class="modal-header"><i class="fas fa-sign-in-alt"></i><h2>Login</h2></div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email / Username</label>
+                    <input type="text" id="loginEmail" required placeholder="Enter your email or username">
+                    <span class="error-msg" id="loginEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" required placeholder="Enter your password">
+                    <span class="error-msg" id="loginPasswordError"></span>
+                </div>
+                <div class="form-error" id="loginError"></div>
+                <button type="submit" class="btn btn-primary btn-full">Login <i class="fas fa-arrow-right"></i></button>
+                <p class="modal-footer-text">Don't have an account? <a href="#" onclick="switchModal('loginModal','registerModal')">Register here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal modal-lg">
+            <button class="modal-close" onclick="closeModal('registerModal')">&times;</button>
+            <div class="modal-header"><i class="fas fa-user-plus"></i><h2>Register</h2></div>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> First Name</label>
+                        <input type="text" id="regFirstName" required placeholder="First name">
+                        <span class="error-msg" id="regFirstNameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Last Name</label>
+                        <input type="text" id="regLastName" required placeholder="Last name">
+                        <span class="error-msg" id="regLastNameError"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="regEmail" required placeholder="your.email@institution.edu">
+                    <span class="error-msg" id="regEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-university"></i> Institution</label>
+                    <input type="text" id="regInstitution" required placeholder="Your institution name">
+                    <span class="error-msg" id="regInstitutionError"></span>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-globe"></i> Country</label>
+                    <select id="regCountry" required>
+                        <option value="">Select country</option>
+                        <option>India</option><option>United States</option><option>United Kingdom</option>
+                        <option>Australia</option><option>Germany</option><option>Japan</option>
+                        <option>Indonesia</option><option>Other</option>
+                    </select>
+                    <span class="error-msg" id="regCountryError"></span>
+                </div>
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="regPassword" required placeholder="Min. 8 characters">
+                        <span class="error-msg" id="regPasswordError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Confirm Password</label>
+                        <input type="password" id="regConfirm" required placeholder="Re-enter password">
+                        <span class="error-msg" id="regConfirmError"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="regTerms" required> I agree to the Terms & Conditions
+                    </label>
+                    <span class="error-msg" id="regTermsError"></span>
+                </div>
+                <div class="form-error" id="registerError"></div>
+                <button type="submit" class="btn btn-primary btn-full">Create Account <i class="fas fa-arrow-right"></i></button>
+                <p class="modal-footer-text">Already have an account? <a href="#" onclick="switchModal('registerModal','loginModal')">Login here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="../js/data.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IJPEDS - International Journal of Pediatrics</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <span><i class="fas fa-envelope"></i> editor@ijpeds.com</span>
+            <span><i class="fas fa-phone"></i> +91-XXXX-XXXXXX</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-book-medical"></i>
+                </div>
+                <div>
+                    <h1>IJPEDS</h1>
+                    <p class="tagline">International Journal of Pediatrics</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search articles..." id="searchInput">
+                    <button onclick="searchArticles()"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-menu" id="userMenu">
+                    <button class="btn-user" onclick="toggleUserDropdown()">
+                        <i class="fas fa-user-circle"></i> User <i class="fas fa-caret-down"></i>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="#" onclick="openModal('loginModal')"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        <a href="#" onclick="openModal('registerModal')"><i class="fas fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <div class="logged-in-menu" id="loggedInMenu" style="display:none;">
+                    <span id="welcomeUser"></span>
+                    <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <button class="mobile-toggle" onclick="toggleMobileNav()"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> HOME</a></li>
+                <li><a href="pages/about.html"><i class="fas fa-info-circle"></i> ABOUT</a></li>
+                <li><a href="pages/archive.html"><i class="fas fa-archive"></i> ARCHIVE</a></li>
+                <li><a href="pages/submission.html"><i class="fas fa-upload"></i> SUBMISSION</a></li>
+                <li><a href="pages/contact.html"><i class="fas fa-envelope"></i> CONTACT US</a></li>
+                <li><a href="pages/alerts.html"><i class="fas fa-bell"></i> ALERTS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge">Peer-Reviewed Journal</span>
+                <h2>International Journal of Pediatrics and Adolescent Medicine</h2>
+                <p>Advancing pediatric healthcare through research and innovation. Open access, peer-reviewed publications.</p>
+                <div class="hero-stats">
+                    <div class="stat"><strong>500+</strong><span>Published Articles</span></div>
+                    <div class="stat"><strong>50+</strong><span>Issues</span></div>
+                    <div class="stat"><strong>1000+</strong><span>Authors</span></div>
+                </div>
+                <div class="hero-actions">
+                    <a href="pages/submission.html" class="btn btn-primary"><i class="fas fa-upload"></i> Submit Article</a>
+                    <a href="pages/archive.html" class="btn btn-outline"><i class="fas fa-archive"></i> Browse Archive</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-grid">
+                <!-- Left: Articles -->
+                <div class="articles-section">
+                    <!-- Announcements -->
+                    <div class="announcement-bar">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Latest Update: New articles published in Vol. 12, Issue 1 (2026) — <a href="pages/archive.html">View Archive</a></span>
+                    </div>
+
+                    <!-- Article Categories -->
+                    <div class="article-tabs">
+                        <button class="tab active" onclick="filterArticles('all', this)">All</button>
+                        <button class="tab" onclick="filterArticles('editorial', this)">Editorial</button>
+                        <button class="tab" onclick="filterArticles('case', this)">Case Reports</button>
+                        <button class="tab" onclick="filterArticles('review', this)">Review Articles</button>
+                        <button class="tab" onclick="filterArticles('original', this)">Original Articles</button>
+                        <button class="tab" onclick="filterArticles('letter', this)">Letters to Editor</button>
+                    </div>
+
+                    <!-- Articles List -->
+                    <div class="articles-list" id="articlesList">
+                        <!-- Articles loaded via JS -->
+                    </div>
+
+                    <div class="load-more">
+                        <button class="btn btn-outline" onclick="loadMoreArticles()">Load More Articles</button>
+                    </div>
+                </div>
+
+                <!-- Right: Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-chart-bar"></i> Journal Metrics</h3>
+                        <div class="metrics">
+                            <div class="metric">
+                                <span class="metric-value">2.8</span>
+                                <span class="metric-label">Impact Factor</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">45</span>
+                                <span class="metric-label">H-Index</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-fire"></i> Most Read</h3>
+                        <ul class="most-read" id="mostRead">
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-tags"></i> Keywords</h3>
+                        <div class="tags-cloud">
+                            <span class="tag">Pediatrics</span>
+                            <span class="tag">Neonatology</span>
+                            <span class="tag">Child Health</span>
+                            <span class="tag">Vaccination</span>
+                            <span class="tag">Nutrition</span>
+                            <span class="tag">Adolescent</span>
+                            <span class="tag">Genetics</span>
+                            <span class="tag">Cardiology</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-rss"></i> Stay Updated</h3>
+                        <p class="sidebar-text">Get notified when new issues are published.</p>
+                        <div class="subscribe-form">
+                            <input type="email" placeholder="Your email address" id="subscribeEmail">
+                            <button class="btn btn-primary btn-sm" onclick="subscribe()">Subscribe</button>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>About IJPEDS</h4>
+                    <p>International Journal of Pediatrics is a peer-reviewed, open-access journal dedicated to advancing pediatric healthcare research.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="pages/about.html">About Journal</a></li>
+                        <li><a href="pages/submission.html">Submit Manuscript</a></li>
+                        <li><a href="pages/archive.html">Archive</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>For Authors</h4>
+                    <ul>
+                        <li><a href="pages/submission.html">Submission Guidelines</a></li>
+                        <li><a href="#">Peer Review Process</a></li>
+                        <li><a href="#">Publication Ethics</a></li>
+                        <li><a href="#">Copyright Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-researchgate"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 IJPEDS — International Journal of Pediatrics. All rights reserved.</p>
+                <p>ISSN: XXXX-XXXX (Online) | Published by IJPEDS Publications</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('loginModal')">&times;</button>
+            <div class="modal-header">
+                <i class="fas fa-sign-in-alt"></i>
+                <h2>Login</h2>
+            </div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail"><i class="fas fa-envelope"></i> Email / Username</label>
+                    <input type="text" id="loginEmail" required placeholder="Enter your email or username">
+                    <span class="error-msg" id="loginEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" required placeholder="Enter your password">
+                    <span class="error-msg" id="loginPasswordError"></span>
+                </div>
+                <div class="form-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe"> Remember me
+                    </label>
+                    <a href="#" class="link">Forgot password?</a>
+                </div>
+                <div class="form-error" id="loginError"></div>
+                <button type="submit" class="btn btn-primary btn-full">Login <i class="fas fa-arrow-right"></i></button>
+                <p class="modal-footer-text">Don't have an account? <a href="#" onclick="switchModal('loginModal','registerModal')">Register here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal modal-lg">
+            <button class="modal-close" onclick="closeModal('registerModal')">&times;</button>
+            <div class="modal-header">
+                <i class="fas fa-user-plus"></i>
+                <h2>Register</h2>
+            </div>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="regFirstName"><i class="fas fa-user"></i> First Name</label>
+                        <input type="text" id="regFirstName" required placeholder="First name">
+                        <span class="error-msg" id="regFirstNameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="regLastName"><i class="fas fa-user"></i> Last Name</label>
+                        <input type="text" id="regLastName" required placeholder="Last name">
+                        <span class="error-msg" id="regLastNameError"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="regEmail" required placeholder="your.email@institution.edu">
+                    <span class="error-msg" id="regEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="regInstitution"><i class="fas fa-university"></i> Institution / Affiliation</label>
+                    <input type="text" id="regInstitution" required placeholder="Your institution name">
+                    <span class="error-msg" id="regInstitutionError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="regCountry"><i class="fas fa-globe"></i> Country</label>
+                    <select id="regCountry" required>
+                        <option value="">Select country</option>
+                        <option>India</option>
+                        <option>United States</option>
+                        <option>United Kingdom</option>
+                        <option>Australia</option>
+                        <option>Germany</option>
+                        <option>Japan</option>
+                        <option>Indonesia</option>
+                        <option>Other</option>
+                    </select>
+                    <span class="error-msg" id="regCountryError"></span>
+                </div>
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="regPassword"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="regPassword" required placeholder="Min. 8 characters">
+                        <span class="error-msg" id="regPasswordError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="regConfirm"><i class="fas fa-lock"></i> Confirm Password</label>
+                        <input type="password" id="regConfirm" required placeholder="Re-enter password">
+                        <span class="error-msg" id="regConfirmError"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="regTerms" required> I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Publication Ethics</a>
+                    </label>
+                    <span class="error-msg" id="regTermsError"></span>
+                </div>
+                <div class="form-error" id="registerError"></div>
+                <button type="submit" class="btn btn-primary btn-full">Create Account <i class="fas fa-arrow-right"></i></button>
+                <p class="modal-footer-text">Already have an account? <a href="#" onclick="switchModal('registerModal','loginModal')">Login here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
