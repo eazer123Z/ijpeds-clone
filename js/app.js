@@ -37,7 +37,7 @@ function doSearch() {
     const q = document.getElementById('searchInput')?.value?.trim();
     if (q) {
         localStorage.setItem('ijpeds_search', q);
-        window.location.href = (window.location.pathname.includes('/pages/') ? '' : 'pages/') + 'search.html';
+        window.location.href = (window.location.pathname.includes('/p/') ? '' : 'p/') + 'search.html';
     }
 }
 document.getElementById('searchInput')?.addEventListener('keypress', e => {
