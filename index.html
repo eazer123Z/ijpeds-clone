@@ -2,12 +2,18 @@
 <link rel="stylesheet" href="css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><title>International Journal of Pediatrics</title></head><body>
-<div class="navbar-ojs"><div class="container"><a href="index.html" class="active">Home</a><a href="p/about.html">About</a><a href="p/login.html">Login</a><a href="p/register.html">Register</a><a href="p/search.html">Search</a><a href="p/current.html">Current</a><a href="p/archives.html">Archives</a><a href="p/announcements.html">Announcements</a></div></div>
 <header class="site-header"><div class="container header-inner">
-<div><div class="site-title"><a href="index.html">International Journal of Pediatrics</a></div>
+<div class="site-branding"><div class="site-title"><a href="index.html">International Journal of Pediatrics</a></div>
 <div class="site-description">p-ISSN: 2088-8694 | e-ISSN: 2722-256X</div></div>
-<div class="header-right"><div class="search-form"><input type="text" placeholder="Search" id="searchInput">
+<div class="header-right"><div id="headerUser" class="header-user-label"></div><div class="search-form"><input type="text" placeholder="Search" id="searchInput">
 <button onclick="doSearch()"><i class="fas fa-search"></i></button></div></div></div></header>
+<div class="navbar-ojs" id="navBar"><div class="container"><span id="navGuest"><a href="index.html" class="active">Home</a><a href="p/about.html">About</a><a href="p/login.html">Login</a><a href="p/register.html">Register</a><a href="p/search.html">Search</a><a href="p/current.html">Current</a><a href="p/archives.html">Archives</a><a href="p/announcements.html">Announcements</a></span><span id="navUser" class="hidden-inline"><a href="index.html" class="active">Home</a><a href="p/about.html">About</a><a href="p/dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a><a href="p/submission-start.html"><i class="fas fa-plus-circle"></i> New Submission</a><a href="p/search.html">Search</a><a href="p/current.html">Current</a><a href="p/archives.html">Archives</a><a href="p/announcements.html">Announcements</a><a href="#" onclick="logout();return false;" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></span></div></div>
+
+
+
+
+
+
 <div class="page-body"><div class="container"><div class="main-content">
 <div class="journal-description">
 <p>The <strong>International Journal of Pediatrics (IJPEDS)</strong>, p-ISSN: 2088-8694, e-ISSN: 2722-256X, is the official publication of the Institute of Advanced Engineering and Science (IAES). The scope of the journal includes all issues in the field of pediatric medicine, child health, and adolescent medicine. Included are techniques for advanced clinical research; neonatology; pediatric surgery; infectious diseases and vaccination; nutrition and growth; developmental and behavioral pediatrics; genetics and rare diseases; child and adolescent mental health; emergency and critical care; and global child health.</p>
