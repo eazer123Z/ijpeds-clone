@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="../css/style.css"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><title>Enter Metadata - IJPEDS</title></head><body><div class="navbar-ojs" id="navBar"><div class="container">
+    <span id="navGuest"><a href="../index.html">Home</a><a href="about.html">About</a><a href="login.html">Login</a><a href="register.html">Register</a><a href="search.html">Search</a><a href="current.html">Current</a><a href="archives.html">Archives</a><a href="announcements.html">Announcements</a></span>
+    <span id="navUser" style="display:none;"><a href="../index.html">Home</a><a href="about.html">About</a><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a><a href="submission-start.html" class="active"><i class="fas fa-plus-circle"></i> New Submission</a><a href="search.html">Search</a><a href="current.html">Current</a><a href="archives.html">Archives</a><a href="announcements.html">Announcements</a><a href="#" onclick="logout();return false;" style="color:#c0392b;"><i class="fas fa-sign-out-alt"></i> Logout</a></span>
+    </div></div><header class="site-header"><div class="container header-inner">
+<div><div class="site-title"><a href="../index.html">International Journal of Pediatrics</a></div>
+<div class="site-description">p-ISSN: 2088-8694 | e-ISSN: 2722-256X</div></div>
+<div class="header-right"><div id="headerUser" style="font-size:12px;color:#555;"></div><div class="search-form"><input type="text" placeholder="Search" id="searchInput"><button onclick="doSearch()"><i class="fas fa-search"></i></button></div></div></div></header><div class="page-body"><div class="container"><div class="main-content">
+<div class="breadcrumb"><a href="../index.html">Home</a><span class="sep">&gt;</span> <a href="dashboard.html">Dashboard</a><span class="sep">&gt;</span> Metadata</div>
+<div class="page-title">Step 3 of 5: Enter Metadata</div>
+
+<div class="submission-steps-bar">
+<span class="step done">1. Begin</span>
+<span class="step done">2. Upload</span>
+<span class="step active">3. Metadata</span>
+<span class="step">4. Confirmation</span>
+<span class="step">5. Complete</span>
+</div>
+
+<form id="submissionStep3" onsubmit="return goStep4(event)">
+<div class="form-group">
+<label>Title <span style="color:red;">*</span></label>
+<input type="text" id="subTitle" required placeholder="Enter manuscript title">
+</div>
+<div class="form-group">
+<label>Abstract <span style="color:red;">*</span> (max 200 words)</label>
+<textarea id="subAbstract" required placeholder="Enter structured abstract" style="min-height:150px;resize:vertical;"></textarea>
+</div>
+<div class="form-group">
+<label>Authors <span style="color:red;">*</span></label>
+<input type="text" id="subAuthors" required placeholder="e.g., Smith J, Doe A, Johnson B">
+</div>
+<div class="form-group">
+<label>Keywords (comma separated)</label>
+<input type="text" id="subKeywords" placeholder="e.g., Pediatrics, Nutrition, Children">
+</div>
+<div class="form-group">
+<label>References</label>
+<textarea id="subReferences" placeholder="List your references (one per line)" style="min-height:100px;resize:vertical;"></textarea>
+</div>
+<div class="form-group">
+<label>Comments for Editor</label>
+<textarea id="subComments" placeholder="Any comments for the editor (optional)" style="min-height:80px;"></textarea>
+</div>
+
+<div style="margin-top:16px;display:flex;gap:10px;">
+<a href="submission-upload.html" class="btn-ojs" style="background:#95a5a6;"><i class="fas fa-arrow-left"></i> Back</a>
+<button type="submit" class="btn-ojs">Save and Continue <i class="fas fa-arrow-right"></i></button>
+</div>
+</form>
+</div><aside class="sidebar">
+<div class="sidebar-block"><div class="sidebar-block-header">Citation Analysis</div><div class="sidebar-block-body"><ul><li><a href="#">Scopus</a></li><li><a href="#">Scimagojr</a></li><li><a href="#">Google Scholar</a></li><li><a href="#">Academia.edu</a></li><li><a href="#">Dimensions</a></li><li><a href="#">Scilit</a></li></ul></div></div>
+<div class="sidebar-block"><div class="sidebar-block-header">Quick Links</div><div class="sidebar-block-body"><ul><li><a href="about.html">Focus and Scope</a></li><li><a href="submissions.html">Author Guideline</a></li><li><a href="submissions.html">Publication Fee</a></li><li><a href="editorial-team.html">Editorial Boards</a></li><li><a href="contact.html">Contact Us</a></li></ul></div></div>
+<div class="sidebar-block"><div class="sidebar-block-header">Journal Content</div><div class="sidebar-block-body"><strong style="font-size:12px;">Browse</strong><ul style="margin-top:6px;"><li><a href="archives.html"><i class="fas fa-angle-right" style="margin-right:4px;"></i> By Issue</a></li><li><a href="#"><i class="fas fa-angle-right" style="margin-right:4px;"></i> By Author</a></li><li><a href="#"><i class="fas fa-angle-right" style="margin-right:4px;"></i> By Title</a></li></ul></div></div>
+<div class="sidebar-block"><div class="sidebar-block-header">Information</div><div class="sidebar-block-body"><ul><li><a href="#">For Readers</a></li><li><a href="#">For Authors</a></li><li><a href="#">For Librarians</a></li></ul></div></div></aside></div></div><footer class="site-footer"><div class="container"><p>ISSN: 2088-8694 (Print) | ISSN: 2722-256X (Online)</p><p style="margin-top:4px;">Copyright &copy; 2026 International Journal of Pediatrics</p></div></footer><div class="toast-container" id="toastContainer"></div><script src="../js/data.js"></script><script src="../js/app.js"></script><script>
+function goStep4(e){
+    e.preventDefault();
+    const title=document.getElementById("subTitle").value.trim();
+    const abstract=document.getElementById("subAbstract").value.trim();
+    const authors=document.getElementById("subAuthors").value.trim();
+    if(!title||!abstract||!authors){showToast("error","Please fill in required fields.");return false}
+    const draft=JSON.parse(localStorage.getItem("ijpeds_draft")||"{}");
+    Object.assign(draft,{title,abstract,authors,keywords:document.getElementById("subKeywords").value,references:document.getElementById("subReferences").value,comments:document.getElementById("subComments").value,step:3});
+    localStorage.setItem("ijpeds_draft",JSON.stringify(draft));
+    window.location.href="submission-confirm.html";
+    return false;
+}
+</script></body></html>
