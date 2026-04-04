@@ -4,6 +4,8 @@ let currentUser = JSON.parse(localStorage.getItem('ijpeds_user')) || null;
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
     updateAuthUI();
+    enhanceUI();
+    hydrateSearchState();
 });
 
 // ===== AUTH-AWARE NAV =====
@@ -34,15 +36,22 @@ function doPageSearch() {
         if (scope === 'Author') return a.authors.toLowerCase().includes(q);
         return a.title.toLowerCase().includes(q) || a.authors.toLowerCase().includes(q) || a.abstract.toLowerCase().includes(q);
     });
-    if (results.length === 0) { container.innerHTML = '<p style="color:#999;">No results found.</p>'; return; }
-    container.innerHTML = '<p style="font-size:12px;color:#777;margin-bottom:12px;">Found ' + results.length + ' result(s)</p>' +
-        results.map(a => '<div class="search-result-item"><div class="title"><a href="article.html" onclick="localStorage.setItem(\'ijpeds_view\',JSON.stringify(articles.find(x=>x.id===' + a.id + ')));">' + a.title + '</a></div><div class="meta">' + a.authors + ' — ' + a.journal + '. ' + a.year + '</div></div>').join('');
+    container.classList.add('search-results-list');
+    if (results.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fas fa-search"></i><div class="empty-state-title">No results found</div><p>Try another keyword, author name, or broader topic.</p></div>';
+        return;
+    }
+    container.innerHTML = '<div class="search-results-summary">Found ' + results.length + ' result(s)</div>' +
+        results.map(a => '<div class="search-result-item"><div class="title"><a href="article.html" onclick="localStorage.setItem(\'ijpeds_view\',JSON.stringify(articles.find(x=>x.id===' + a.id + ')));">' + a.title + '</a></div><div class="meta">' + a.authors + ' — ' + a.journal + '. ' + a.year + '</div><div class="snippet">' + a.abstract.slice(0, 180) + '...</div></div>').join('');
 }
 document.getElementById('pageSearchInput')?.addEventListener('keypress', e => { if (e.key === 'Enter') doPageSearch(); });
 
 function doSearch() {
     const q = document.getElementById('searchInput')?.value?.trim();
-    if (q) { localStorage.setItem('ijpeds_search', q); window.location.href = 'p/search.html'; }
+    if (!q) return;
+    localStorage.setItem('ijpeds_search', q);
+    const isSubPage = window.location.pathname.includes('/p/');
+    window.location.href = isSubPage ? 'search.html' : 'p/search.html';
 }
 document.getElementById('searchInput')?.addEventListener('keypress', e => { if (e.key === 'Enter') doSearch(); });
 
@@ -111,7 +120,10 @@ function logout() {
     currentUser = null;
     localStorage.removeItem('ijpeds_user');
     showToast('success', 'Logged out.');
-    setTimeout(() => { window.location.href = '../index.html'; }, 500);
+    setTimeout(() => {
+        const isSubPage = window.location.pathname.includes('/p/');
+        window.location.href = isSubPage ? '../index.html' : 'index.html';
+    }, 500);
 }
 
 // ===== HELPERS =====
@@ -136,4 +148,45 @@ function showToast(type, message) {
     t.innerHTML = '<i class="toast-icon ' + icons[type] + '"></i><span class="toast-message">' + message + '</span><button class="toast-close" onclick="this.parentElement.remove()">&times;</button>';
     c.appendChild(t);
     setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s'; setTimeout(() => t.remove(), 300); }, 3500);
+}
+function enhanceUI() {
+    const body = document.body;
+    const pageKey = (window.location.pathname.split('/').pop() || 'index.html').replace('.html', '');
+    body.dataset.page = pageKey;
+    if (document.querySelector('.sidebar')) body.classList.add('has-sidebar');
+    document.querySelectorAll('.sidebar-block-header').forEach(header => {
+        const text = header.textContent.trim().toLowerCase();
+        const iconMap = {
+            'citation analysis': 'fa-chart-line',
+            'quick links': 'fa-bolt',
+            'follow us on': 'fa-share-nodes',
+            'journal content': 'fa-book-open',
+            'information': 'fa-circle-info'
+        };
+        const iconName = iconMap[text];
+        if (!iconName || header.querySelector('i')) return;
+        header.innerHTML = '<i class="fas ' + iconName + '"></i><span>' + header.textContent + '</span>';
+    });
+    document.querySelectorAll('.content-card-no-border').forEach(card => card.classList.add('surface-panel'));
+    document.querySelectorAll('.card-lite').forEach(card => card.classList.add('surface-panel'));
+    document.querySelectorAll('.sidebar-block-body strong').forEach(label => label.classList.add('sidebar-label'));
+    document.querySelectorAll('.search-form[style]').forEach(form => form.classList.add('sidebar-search-form'));
+    document.querySelectorAll('.main-content form > p:first-child').forEach(paragraph => paragraph.classList.add('form-intro-text'));
+    const completionPanel = document.querySelector('.main-content > div[style*="text-align:center"]');
+    if (completionPanel) completionPanel.classList.add('completion-panel');
+    const searchResults = document.getElementById('searchResults');
+    if (searchResults && !searchResults.querySelector('.empty-state')) {
+        const introText = searchResults.querySelector('p');
+        if (introText) {
+            introText.outerHTML = '<div class="empty-state"><i class="fas fa-magnifying-glass"></i><div class="empty-state-title">Search the journal archive</div><p>Enter keywords to find articles, authors, and abstracts.</p></div>';
+        }
+    }
+}
+function hydrateSearchState() {
+    const pageSearchInput = document.getElementById('pageSearchInput');
+    const savedQuery = localStorage.getItem('ijpeds_search');
+    if (!pageSearchInput || !savedQuery) return;
+    pageSearchInput.value = savedQuery;
+    doPageSearch();
+    localStorage.removeItem('ijpeds_search');
 }
