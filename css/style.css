@@ -5,12 +5,12 @@ body {
     font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 14px;
     line-height: 1.65;
-    color: #2f3a45;
-    background: #ffffff;
+    color: #2a3540;
+    background: #f3f6fa;
 }
 img { max-width: 100%; height: auto; }
-a { color: #296293; text-decoration: none; }
-a:hover { color: #c0392b; text-decoration: underline; }
+a { color: #245f8e; text-decoration: none; }
+a:hover { color: #b83b2f; text-decoration: underline; }
 .container {
     width: 100%;
     max-width: 1170px;
@@ -20,8 +20,8 @@ a:hover { color: #c0392b; text-decoration: underline; }
 
 /* ===== TOP BRAND HEADER ===== */
 .site-header {
-    background: #ffffff;
-    border-bottom: 4px solid #2c3e50;
+    background: #fbfdff;
+    border-bottom: 4px solid #274662;
 }
 .header-inner {
     min-height: 112px;
@@ -40,7 +40,7 @@ a:hover { color: #c0392b; text-decoration: underline; }
     line-height: 1.15;
     font-weight: 700;
     letter-spacing: 0.3px;
-    color: #1f4a73;
+    color: #1f4d73;
 }
 .site-title a {
     color: inherit;
@@ -54,7 +54,7 @@ a:hover { color: #c0392b; text-decoration: underline; }
     line-height: 1.4;
     letter-spacing: 1.3px;
     text-transform: uppercase;
-    color: #8e9aa5;
+    color: #738190;
 }
 .header-right {
     flex: 0 0 auto;
@@ -73,7 +73,7 @@ a:hover { color: #c0392b; text-decoration: underline; }
     display: flex;
     align-items: stretch;
     min-width: 260px;
-    border: 1px solid #d8dde3;
+    border: 1px solid #cbd5df;
     border-radius: 2px;
     overflow: hidden;
     background: #fff;
@@ -86,28 +86,28 @@ a:hover { color: #c0392b; text-decoration: underline; }
     padding: 9px 12px;
     font: inherit;
     font-size: 12px;
-    color: #2f3a45;
+    color: #2a3540;
     background: transparent;
 }
 .search-form input::placeholder {
-    color: #8a97a3;
+    color: #8190a0;
 }
 .search-form button {
     border: 0;
-    background: #2c3e50;
+    background: #274662;
     color: #fff;
     padding: 0 14px;
     cursor: pointer;
     font-size: 12px;
 }
 .search-form button:hover {
-    background: #1f2d3a;
+    background: #1e364d;
 }
 
 /* ===== NAVBAR ===== */
 .navbar-ojs {
-    background: #f5f5f5;
-    border-bottom: 1px solid #d8dde3;
+    background: #eaf0f6;
+    border-bottom: 1px solid #cfd8e2;
 }
 .navbar-ojs .container {
     display: flex;
@@ -142,21 +142,22 @@ a:hover { color: #c0392b; text-decoration: underline; }
 .navbar-ojs a:hover,
 #navGuest a:hover,
 #navUser a:hover {
-    color: #c0392b;
+    color: #b83b2f;
     text-decoration: none;
-    background: rgba(255,255,255,0.65);
+    background: rgba(255,255,255,0.82);
 }
 .navbar-ojs a.active,
 #navGuest a.active,
 #navUser a.active {
-    color: #c0392b;
+    color: #b83b2f;
 }
 .logout-link {
-    color: #c0392b !important;
+    color: #b83b2f !important;
 }
 
 /* ===== MAIN LAYOUT ===== */
 .page-body {
+    background: linear-gradient(180deg, #f3f6fa 0%, #f7f9fc 100%);
     padding: 26px 0 34px;
 }
 .page-body .container {
@@ -236,7 +237,7 @@ a:hover { color: #c0392b; text-decoration: underline; }
 /* ===== HOMEPAGE HERO ===== */
 .hero-banner {
     margin-bottom: 24px;
-    background: linear-gradient(135deg, #173a5b 0%, #2d628f 100%);
+    background: linear-gradient(135deg, #1d4569 0%, #356f9e 100%);
     border-radius: 4px;
     overflow: hidden;
     color: #fff;
@@ -284,9 +285,9 @@ a:hover { color: #c0392b; text-decoration: underline; }
     align-items: center;
     gap: 6px;
     padding: 8px 14px;
-    background: rgba(255,255,255,0.13);
+    background: rgba(255,255,255,0.16);
     color: #fff;
-    border: 1px solid rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.2);
     border-radius: 3px;
     font-size: 11px;
     font-weight: 700;
@@ -295,7 +296,7 @@ a:hover { color: #c0392b; text-decoration: underline; }
     text-transform: uppercase;
 }
 .quick-link-btn:hover {
-    background: rgba(255,255,255,0.22);
+    background: rgba(255,255,255,0.28);
     color: #fff;
     text-decoration: none;
 }
@@ -543,7 +544,7 @@ textarea:focus {
     padding: 0 18px;
     border: 0;
     border-radius: 2px;
-    background: #2c3e50;
+    background: #274662;
     color: #fff;
     font: inherit;
     font-size: 13px;
@@ -551,7 +552,7 @@ textarea:focus {
     cursor: pointer;
 }
 .btn-ojs:hover {
-    background: #1f2d3a;
+    background: #1e364d;
     text-decoration: none;
 }
 .login-links {
@@ -566,11 +567,11 @@ textarea:focus {
 /* ===== SIDEBAR ===== */
 .sidebar-block {
     margin-bottom: 20px;
-    border: 1px solid #e0e5ea;
-    background: #fff;
+    border: 1px solid #d4dde6;
+    background: #fcfdff;
 }
 .sidebar-block-header {
-    background: #2c3e50;
+    background: #274662;
     color: #fff;
     padding: 9px 12px;
     font-size: 12px;
@@ -629,8 +630,8 @@ textarea:focus {
 .site-footer {
     margin-top: 36px;
     padding: 16px 0;
-    background: #2c3e50;
-    color: #c3cbd3;
+    background: #22384f;
+    color: #d0d7df;
     font-size: 11px;
     text-align: center;
 }
