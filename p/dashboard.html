@@ -40,11 +40,11 @@
 <div class="sidebar-block"><div class="sidebar-block-header">Journal Content</div><div class="sidebar-block-body"><strong class="label-small">Browse</strong><ul class="mt-6"><li><a href="archives.html"><i class="fas fa-angle-right mr-4"></i> By Issue</a></li><li><a href="#"><i class="fas fa-angle-right mr-4"></i> By Author</a></li><li><a href="#"><i class="fas fa-angle-right mr-4"></i> By Title</a></li></ul></div></div>
 <div class="sidebar-block"><div class="sidebar-block-header">Information</div><div class="sidebar-block-body"><ul><li><a href="#">For Readers</a></li><li><a href="#">For Authors</a></li><li><a href="#">For Librarians</a></li></ul></div></div></aside></div></div><footer class="site-footer"><div class="container"><p>ISSN: 2088-8694 (Print) | ISSN: 2722-256X (Online)</p><p class="mt-4">Copyright &copy; 2026 International Journal of Pediatrics</p></div></footer><div class="toast-container" id="toastContainer"></div><script src="../js/data.js"></script><script src="../js/app.js"></script><script>
 document.addEventListener("DOMContentLoaded",()=>{
-    const u=JSON.parse(localStorage.getItem("ijpeds_user"));
-    if(!u){window.location.href="login.html";return}
+    const u=getSessionUser();
+    if(!u){redirectTo("login.html");return}
     document.getElementById("dashUser").textContent=u.firstName+" "+u.lastName;
     document.getElementById("accountInfo").innerHTML="<p><strong>Name:</strong> "+u.firstName+" "+u.lastName+"</p><p><strong>Email:</strong> "+u.email+"</p><p><strong>Username:</strong> "+u.username+"</p><p><strong>Institution:</strong> "+(u.institution||"N/A")+"</p><p><strong>Country:</strong> "+(u.country||"N/A")+"</p>";
-    const subs=JSON.parse(localStorage.getItem("ijpeds_submissions")||"[]").filter(s=>s.userId===u.id);
+    const subs=getUserSubmissions(u.id);
     const c=document.getElementById("mySubmissions");
     if(subs.length>0){
         c.innerHTML=subs.map(s=>'<div class="card-lite"><div class="text-13 text-primary fw-600">'+s.title+'</div><div class="text-11 text-muted mt-4">Type: '+s.type+' | Status: <strong>'+s.status+'</strong> | Submitted: '+new Date(s.submittedAt).toLocaleDateString()+'</div></div>').join("");

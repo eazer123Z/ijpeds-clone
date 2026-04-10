@@ -60,12 +60,12 @@
 <div class="sidebar-block"><div class="sidebar-block-header">Information</div><div class="sidebar-block-body"><ul><li><a href="#">For Readers</a></li><li><a href="#">For Authors</a></li><li><a href="#">For Librarians</a></li></ul></div></div></aside></div></div><footer class="site-footer"><div class="container"><p>ISSN: 2088-8694 (Print) | ISSN: 2722-256X (Online)</p><p class="mt-4">Copyright &copy; 2026 International Journal of Pediatrics</p></div></footer><div class="toast-container" id="toastContainer"></div><script src="../js/data.js"></script><script src="../js/app.js"></script><script>
 function goStep2(e){
     e.preventDefault();
-    const u=JSON.parse(localStorage.getItem("ijpeds_user"));
-    if(!u){showToast("warning","Please login first.");setTimeout(()=>window.location.href="login.html",800);return false}
+    const u=getSessionUser();
+    if(!u){showToast("warning","Please login first.");setTimeout(()=>redirectTo("login.html"),800);return false}
     const type=document.getElementById("subType").value;
     if(!type){document.getElementById("step1Error").textContent="Please select a submission type.";document.getElementById("step1Error").classList.add("show");return false}
     localStorage.setItem("ijpeds_draft",JSON.stringify({type:type,lang:document.getElementById("subLang").value,step:1}));
-    window.location.href="submission-upload.html";
+    redirectTo("submission-upload.html");
     return false;
 }
 </script></body></html>

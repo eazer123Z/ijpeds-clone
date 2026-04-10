@@ -62,10 +62,10 @@ function goStep4(e){
     const abstract=document.getElementById("subAbstract").value.trim();
     const authors=document.getElementById("subAuthors").value.trim();
     if(!title||!abstract||!authors){showToast("error","Please fill in required fields.");return false}
-    const draft=JSON.parse(localStorage.getItem("ijpeds_draft")||"{}");
+    const draft=getDraftSubmission();
     Object.assign(draft,{title,abstract,authors,keywords:document.getElementById("subKeywords").value,references:document.getElementById("subReferences").value,comments:document.getElementById("subComments").value,step:3});
     localStorage.setItem("ijpeds_draft",JSON.stringify(draft));
-    window.location.href="submission-confirm.html";
+    redirectTo("submission-confirm.html");
     return false;
 }
 </script></body></html>

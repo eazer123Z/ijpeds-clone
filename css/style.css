@@ -173,6 +173,10 @@ a:hover { color: #b83b2f; text-decoration: underline; }
     background: rgba(7, 24, 38, 0.52);
     box-shadow: 0 10px 24px rgba(12, 28, 46, 0.12);
 }
+#navGuest.hidden-inline,
+#navUser.hidden-inline {
+    display: none;
+}
 .navbar-ojs a,
 #navGuest a,
 #navUser a {

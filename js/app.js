@@ -1,11 +1,52 @@
 // ===== APP STATE =====
-let currentUser = JSON.parse(localStorage.getItem('ijpeds_user')) || null;
+let currentUser = readStorageJSON('ijpeds_user', null);
+const previewMode = new URLSearchParams(window.location.search).get('preview') === '1';
+const previewUser = previewMode ? {
+    id: 999001,
+    firstName: 'Alicia',
+    lastName: 'Hartono',
+    username: 'alicia.hartono',
+    email: 'alicia.hartono@example.com',
+    institution: 'Makassar Pediatric Research Center',
+    country: 'Indonesia'
+} : null;
+const previewDraft = previewMode ? {
+    type: 'Article',
+    lang: 'English',
+    title: 'Integrated Telehealth Monitoring for Childhood Asthma Management in Urban Clinics',
+    abstract: 'This study evaluates a telehealth-assisted asthma monitoring workflow for pediatric patients across three urban clinics. The intervention combines weekly symptom tracking, caregiver education, and early warning review by clinicians to improve continuity of care and reduce avoidable acute episodes.',
+    authors: 'Hartono A, Pranata R, Siregar M',
+    keywords: 'Pediatrics, Telehealth, Asthma, Child Health',
+    references: 'Hartono A. Pediatric telehealth pathways. 2025.\nPranata R. Asthma adherence in children. 2024.',
+    comments: 'Preview mode for design import.',
+    file: 'ijpeds-telehealth-manuscript.docx',
+    step: 4
+} : null;
+const previewSubmissions = previewMode ? [
+    {
+        id: 88001,
+        userId: 999001,
+        title: 'Integrated Telehealth Monitoring for Childhood Asthma Management in Urban Clinics',
+        type: 'Article',
+        status: 'Awaiting Assignment',
+        submittedAt: '2026-04-05T07:06:42.000Z'
+    },
+    {
+        id: 88002,
+        userId: 999001,
+        title: 'Nutrition Adherence Patterns in School-Age Children During Community-Based Intervention',
+        type: 'Review',
+        status: 'In Review',
+        submittedAt: '2026-03-18T03:15:00.000Z'
+    }
+] : [];
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
     updateAuthUI();
     enhanceUI();
     hydrateSearchState();
+    preservePreviewLinks();
 });
 
 // ===== AUTH-AWARE NAV =====
@@ -13,13 +54,14 @@ function updateAuthUI() {
     const navGuest = document.getElementById('navGuest');
     const navUser = document.getElementById('navUser');
     const headerUser = document.getElementById('headerUser');
+    const sessionUser = getSessionUser();
     
-    if (currentUser) {
+    if (sessionUser) {
         if (navGuest) navGuest.style.display = 'none';
-        if (navUser) navUser.style.display = 'inline';
-        if (headerUser) headerUser.innerHTML = '<i class="fas fa-user"></i> ' + currentUser.firstName + ' ' + currentUser.lastName;
+        if (navUser) navUser.style.display = 'flex';
+        if (headerUser) headerUser.innerHTML = '<i class="fas fa-user"></i> ' + sessionUser.firstName + ' ' + sessionUser.lastName;
     } else {
-        if (navGuest) navGuest.style.display = 'inline';
+        if (navGuest) navGuest.style.display = 'flex';
         if (navUser) navUser.style.display = 'none';
         if (headerUser) headerUser.innerHTML = '';
     }
@@ -51,7 +93,7 @@ function doSearch() {
     if (!q) return;
     localStorage.setItem('ijpeds_search', q);
     const isSubPage = window.location.pathname.includes('/p/');
-    window.location.href = isSubPage ? 'search.html' : 'p/search.html';
+    redirectTo(isSubPage ? 'search.html' : 'p/search.html');
 }
 document.getElementById('searchInput')?.addEventListener('keypress', e => { if (e.key === 'Enter') doSearch(); });
 
@@ -77,7 +119,7 @@ function handleLogin(e) {
     currentUser = user;
     localStorage.setItem('ijpeds_user', JSON.stringify(user));
     showToast('success', 'Welcome back, ' + user.firstName + '!');
-    setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+    setTimeout(() => { redirectTo('dashboard.html'); }, 800);
 }
 
 // ===== REGISTER =====
@@ -112,7 +154,7 @@ function handleRegister(e) {
     currentUser = user;
     localStorage.setItem('ijpeds_user', JSON.stringify(user));
     showToast('success', 'Account created! Redirecting...');
-    setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+    setTimeout(() => { redirectTo('dashboard.html'); }, 800);
 }
 
 // ===== LOGOUT =====
@@ -122,8 +164,59 @@ function logout() {
     showToast('success', 'Logged out.');
     setTimeout(() => {
         const isSubPage = window.location.pathname.includes('/p/');
-        window.location.href = isSubPage ? '../index.html' : 'index.html';
+        redirectTo(isSubPage ? '../index.html' : 'index.html');
     }, 500);
+}
+
+function readStorageJSON(key, fallback) {
+    try {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : fallback;
+    } catch (error) {
+        return fallback;
+    }
+}
+
+function isPreviewMode() {
+    return previewMode;
+}
+
+function appendPreview(url) {
+    if (!previewMode || !url) return url;
+    if (/^(#|https?:|mailto:|tel:|javascript:)/i.test(url)) return url;
+    const [base, hash] = url.split('#');
+    if (/[?&]preview=1(?:&|$)/.test(base)) return url;
+    const separator = base.includes('?') ? '&' : '?';
+    return base + separator + 'preview=1' + (hash ? '#' + hash : '');
+}
+
+function redirectTo(url) {
+    window.location.href = appendPreview(url);
+}
+
+function preservePreviewLinks() {
+    if (!previewMode) return;
+    document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        link.setAttribute('href', appendPreview(href));
+    });
+}
+
+function getSessionUser() {
+    return currentUser || previewUser;
+}
+
+function getDraftSubmission() {
+    const storedDraft = readStorageJSON('ijpeds_draft', null);
+    if (storedDraft && Object.keys(storedDraft).length > 0) return storedDraft;
+    return previewDraft ? { ...previewDraft } : {};
+}
+
+function getUserSubmissions(userId) {
+    const storedSubmissions = readStorageJSON('ijpeds_submissions', []);
+    if (storedSubmissions.length > 0) return storedSubmissions.filter(item => item.userId === userId);
+    return previewSubmissions.filter(item => item.userId === userId);
 }
 
 // ===== HELPERS =====
@@ -153,6 +246,7 @@ function enhanceUI() {
     const body = document.body;
     const pageKey = (window.location.pathname.split('/').pop() || 'index.html').replace('.html', '');
     body.dataset.page = pageKey;
+    body.dataset.preview = previewMode ? 'true' : 'false';
     if (document.querySelector('.sidebar')) body.classList.add('has-sidebar');
     document.querySelectorAll('.sidebar-block-header').forEach(header => {
         const text = header.textContent.trim().toLowerCase();

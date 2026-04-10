@@ -56,11 +56,11 @@ function goStep3(e){
     e.preventDefault();
     const f=document.getElementById("subFile");
     if(!f.files[0]){showToast("error","Please upload your manuscript file.");return false}
-    const draft=JSON.parse(localStorage.getItem("ijpeds_draft")||"{}");
+    const draft=getDraftSubmission();
     draft.file=f.files[0].name;
     draft.step=2;
     localStorage.setItem("ijpeds_draft",JSON.stringify(draft));
-    window.location.href="submission-metadata.html";
+    redirectTo("submission-metadata.html");
     return false;
 }
 </script></body></html>
